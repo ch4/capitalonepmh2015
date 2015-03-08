@@ -31,6 +31,7 @@ var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
 var levelController = require('./controllers/level');
+var nexmoController = require('./controllers/nexmo');
 
 /**
  * API keys and Passport configuration.
@@ -112,7 +113,9 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
-app.get('/level/getaccounts',levelController.getData);
+app.get('/level/getaccounts',levelController.getAccounts);
+app.get('/level/gettransactions',levelController.getTransactions);
+app.get('/nexmo/testsms', nexmoController.testSms);
 
 /**
  * API examples routes.

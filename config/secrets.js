@@ -23,6 +23,12 @@ module.exports = {
 
   db: process.env.MONGODB || 'mongodb://localhost:27017/test',
 
+  nexmo: {
+      apikey : process.env.NEXMO_APIKEY || 'n3xm0rocks',
+      apisecret : process.env.NEXMO_APISECRET || '12ab34cd',
+      number : process.env.NEXMO_NUMBER || '12529178617'
+  },
+
   sessionSecret: process.env.SESSION_SECRET || 'Your Session Secret goes here',
 
   mailgun: {
