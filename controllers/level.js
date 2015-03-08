@@ -98,12 +98,13 @@ exports.getTransactions = function(req, res) {
                     if (err) { throw err; }
 
                     if(transactions.length > 0) {
-                        var reduction = _.reduce(transactions, function (sum, n) {
+                        var reduction2 = _.reduce(transactions, function (sum, n) {
                             //console.log(filterFloat(n.amount));
                             return filterFloat(sum) + filterFloat(n.amount);
                         });
                         console.log(transactions);
-                        reductionResult[transactions[0].category] = filterFloat(reductionResult[transactions[0].category]) + filterFloat(reduction);
+                        reductionResult[transactions[0].category] = filterFloat(reductionResult[transactions[0].category]) + filterFloat(reduction2);
+                        //console.log(reductionResult[transactions[0].category]);
                     }
                 });
             });
