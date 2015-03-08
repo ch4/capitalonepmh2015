@@ -2,6 +2,7 @@
  * Created by hc on 3/7/2015.
  */
 var request = require('request');
+var _ = require('lodash');
 
 exports.getAccounts = function(req, res) {
     request({
@@ -41,8 +42,46 @@ exports.getTransactions = function(req, res) {
 
     }, function(error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log(body);
-            res.send(body);
+            //console.log(body);
+            //res.send(body);
+            var filterFloat = function (value) {
+                if(/^(\-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/
+                        .test(value))
+                    return Number(value);
+                return 0;
+            }
+
+            var groupedTransactions =_.groupBy(body.transactions, function(n) {
+                return n.categorization;
+            });
+
+            //var reducedByCat = _.reduce(groupedTransactions, function(result, n, key) {
+            //    result[key] = result[key] + n.amount
+            //    return result;
+            //}, {});
+
+            var reductionResult = {};
+            _.forEach(groupedTransactions, function(catarray, catkey) {
+
+                //var reduction = _.reduce(catarray, function(result, n, key) {
+                //    //result[key] = result[key] + n.amount
+                //
+                //    console.log(n.amount);
+                //    console.log(Number(result) + Number(n.amount));
+                //    result = Number(result) + Number(n.amount);
+                //
+                //    return result;
+                //}, {});
+
+                var reduction = _.reduce(catarray, function(sum, n) {
+                    if(sum)
+                    return filterFloat(sum) + filterFloat(n.amount);
+                });
+
+                reductionResult[catkey] = filterFloat(reduction) / (100*100); //convert to dollars
+            });
+
+            res.send(reductionResult);
         } else {
             res.send(body);
         }
