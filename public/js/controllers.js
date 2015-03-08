@@ -1,11 +1,13 @@
 angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope, Dashboard) {
-    $scope.gauge_shopping = 0;
+        $scope.gauge_shopping = 0;
+        $scope.gauge_groceries = 0;
     $scope.refreshDash = function(){
         Dashboard.get_transactions(function(data){
             console.log(data);
             $scope.gauge_shopping = data['Shopping'];
+            $scope.gauge_groceries = data['Groceries'];
         });
     };
     $scope.refreshDash();

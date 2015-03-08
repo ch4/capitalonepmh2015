@@ -1,8 +1,8 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-      <div class="list card">
-          <div class="item item-divider">Shopping</div>
-          <div class="item item-body">
+      <!--<div class="list card">-->
+          <!--<div class="item item-divider">Shopping</div>-->
+          <!--<div class="item item-body">-->
               <ng-dial-gauge id="gauge_shopping"
                              scale-min="0"
                              scale-max="3000"
@@ -16,10 +16,30 @@
                              scale-minor-length="0"
                              scale-major-length="0"
                              line-cap="butt"
-                             style="stroke:blue;font-weight:100;width:10px;">
+                             title="Shopping"
+                             <!--style="stroke:blue;font-weight:100;width:10px;"-->
+                      >
               </ng-dial-gauge>
-          </div>
-      </div>
+
+      <ng-dial-gauge id="gauge_groceries"
+                     scale-min="0"
+                     scale-max="3000"
+                     border-width="0"
+                     ng-model="gauge_groceries"
+                     bar-color="#00ff00"
+                     bar-color-end="#ff0000"
+                     bar-width="5"
+                     angle="359"
+                     rotate="0"
+                     scale-minor-length="0"
+                     scale-major-length="0"
+                     line-cap="butt"
+                     title="Groceries"
+      <!--style="stroke:blue;font-weight:100;width:10px;"-->
+      >
+      </ng-dial-gauge>
+          <!--</div>-->
+      <!--</div>-->
 
     <!--<div class="list card">-->
       <!--<div class="item item-divider">Recent Updates</div>-->
