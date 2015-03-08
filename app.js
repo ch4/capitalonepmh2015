@@ -1,5 +1,7 @@
 /**
  * Module dependencies.
+ *
+ * to run: export MONGODB=mongodb://cap1:cap1@ds055709.mongolab.com:55709/cap1 && node app.js
  */
 var express = require('express');
 var cookieParser = require('cookie-parser');
