@@ -117,6 +117,7 @@ app.get('/level/getaccounts',levelController.getAccounts);
 app.get('/level/gettransactions',levelController.getTransactions);
 app.get('/level/addtransaction',levelController.addTransactions);
 app.get('/nexmo/testsms', nexmoController.testSms);
+app.get('/nexmo/callmomma', nexmoController.callmomma);
 
 /**
  * API examples routes.

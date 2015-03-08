@@ -75,6 +75,7 @@ exports.getTransactions = function(req, res) {
             //}, {});
 
             var reductionResult = {};
+            var asyncCounter = 0;
             _.forEach(groupedTransactions, function(catarray, catkey) {
 
                 //var reduction = _.reduce(catarray, function(result, n, key) {
@@ -90,8 +91,11 @@ exports.getTransactions = function(req, res) {
                 var reduction = _.reduce(catarray, function(sum, n) {
                     return filterFloat(sum) + filterFloat(n.amount);
                 });
+                //console.log(catarray);
 
                 reductionResult[catkey] = -1 * (filterFloat(reduction) / (100*100)); //convert to dollars
+
+                asyncCounter += 1;
 
                 //get demo values
                 Transaction.find({ category: catkey }, function(err, transactions) {
@@ -102,14 +106,22 @@ exports.getTransactions = function(req, res) {
                             //console.log(filterFloat(n.amount));
                             return filterFloat(sum) + filterFloat(n.amount);
                         });
-                        console.log(transactions);
+                        console.log(reduction2);
                         reductionResult[transactions[0].category] = filterFloat(reductionResult[transactions[0].category]) + filterFloat(reduction2);
                         //console.log(reductionResult[transactions[0].category]);
+                    }
+
+                    asyncCounter -= 1;
+                    if(asyncCounter <= 0){
+
+                        //hack to call yo momma
+
+                        res.send(reductionResult);
                     }
                 });
             });
 
-            res.send(reductionResult);
+            //res.send(reductionResult);
         } else {
             res.send(body);
         }
