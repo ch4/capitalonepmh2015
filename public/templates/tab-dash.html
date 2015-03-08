@@ -1,28 +1,49 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">Recent Updates</div>
-      <div class="item item-body">
-        <div>
-          There is a fire in <b>sector 3</b>
-        </div>
+      <div class="list card">
+          <div class="item item-divider">Recent Updates</div>
+          <div class="item item-body">
+              <ng-dial-gauge id="gauge_shopping"
+                             scale-min="0"
+                             scale-max="2000"
+                             border-width="0"
+                             ng-model="gauge_shopping"
+                             bar-color="#ff0000"
+                             bar-color-end="#00ff00"
+                             bar-width="5"
+                             angle="359"
+                             rotate="0"
+                             scale-minor-length="0"
+                             scale-major-length="0"
+                             line-cap="butt"
+                             style="stroke:blue;font-weight:100;width:10px;">
+              </ng-dial-gauge>
+          </div>
       </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Health</div>
-      <div class="item item-body">
-        <div>
-          You ate an apple today!
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          You have <b>29</b> meetings on your calendar tomorrow.
-        </div>
-      </div>
-    </div>
+
+    <!--<div class="list card">-->
+      <!--<div class="item item-divider">Recent Updates</div>-->
+      <!--<div class="item item-body">-->
+        <!--<div>-->
+          <!--There is a fire in <b>sector 3</b>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="list card">-->
+      <!--<div class="item item-divider">Health</div>-->
+      <!--<div class="item item-body">-->
+        <!--<div>-->
+          <!--You ate an apple today!-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="list card">-->
+      <!--<div class="item item-divider">Upcoming</div>-->
+      <!--<div class="item item-body">-->
+        <!--<div>-->
+          <!--You have <b>29</b> meetings on your calendar tomorrow.-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
   </ion-content>
 </ion-view>
