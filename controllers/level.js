@@ -3,6 +3,20 @@
  */
 var request = require('request');
 var _ = require('lodash');
+var Alert = require('../models/Alert');
+var Transaction = require('../models/Transaction');
+
+exports.addTransactions = function(req, res) {
+    var newTransaction = new Transaction({
+        category : 'Shopping',
+        amount : 100
+    });
+    newTransaction.save(function (err, doc) {
+        if (err) { throw err; }
+
+        res.json(doc);
+    });
+};
 
 exports.getAccounts = function(req, res) {
     request({
@@ -74,11 +88,24 @@ exports.getTransactions = function(req, res) {
                 //}, {});
 
                 var reduction = _.reduce(catarray, function(sum, n) {
-                    if(sum)
                     return filterFloat(sum) + filterFloat(n.amount);
                 });
 
-                reductionResult[catkey] = filterFloat(reduction) / (100*100); //convert to dollars
+                reductionResult[catkey] = -1 * (filterFloat(reduction) / (100*100)); //convert to dollars
+
+                //get demo values
+                Transaction.find({ category: catkey }, function(err, transactions) {
+                    if (err) { throw err; }
+
+                    if(transactions.length > 0) {
+                        var reduction = _.reduce(transactions, function (sum, n) {
+                            //console.log(filterFloat(n.amount));
+                            return filterFloat(sum) + filterFloat(n.amount);
+                        });
+                        console.log(transactions);
+                        reductionResult[transactions[0].category] = filterFloat(reductionResult[transactions[0].category]) + filterFloat(reduction);
+                    }
+                });
             });
 
             res.send(reductionResult);

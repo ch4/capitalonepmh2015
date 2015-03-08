@@ -47,4 +47,27 @@ angular.module('starter.services', [])
       return null;
     }
   };
+})
+.factory('Dashboard', function($http) {
+
+        function GetTransactions(callback){
+            $http.get('/level/gettransactions').
+                success(function(data, status, headers, config) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    //credits = data;
+                    callback(data);
+                }).
+                error(function(data, status, headers, config) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    callback();
+                });
+        }
+
+    return {
+        get_transactions: function(callback){
+            GetTransactions(callback);
+        }
+    };
 });

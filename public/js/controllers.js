@@ -1,8 +1,14 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
-        $scope.gauge_shopping = 1000;
-
+.controller('DashCtrl', function($scope, Dashboard) {
+    $scope.gauge_shopping = 0;
+    $scope.refreshDash = function(){
+        Dashboard.get_transactions(function(data){
+            console.log(data);
+            $scope.gauge_shopping = data['Shopping'];
+        });
+    };
+    $scope.refreshDash();
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {

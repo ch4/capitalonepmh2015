@@ -115,6 +115,7 @@ app.post('/account/delete', passportConf.isAuthenticated, userController.postDel
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 app.get('/level/getaccounts',levelController.getAccounts);
 app.get('/level/gettransactions',levelController.getTransactions);
+app.get('/level/addtransaction',levelController.addTransactions);
 app.get('/nexmo/testsms', nexmoController.testSms);
 
 /**
