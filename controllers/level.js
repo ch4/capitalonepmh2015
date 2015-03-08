@@ -5,6 +5,7 @@ var request = require('request');
 var _ = require('lodash');
 var Alert = require('../models/Alert');
 var Transaction = require('../models/Transaction');
+var nexmoController = require('./nexmo')
 
 exports.addTransactions = function(req, res) {
     var newTransaction = new Transaction({
@@ -109,13 +110,16 @@ exports.getTransactions = function(req, res) {
                         console.log(reduction2);
                         reductionResult[transactions[0].category] = filterFloat(reductionResult[transactions[0].category]) + filterFloat(reduction2);
                         //console.log(reductionResult[transactions[0].category]);
+                        
+                        //hack to call yo momma
+                        if(reductionResult[transactions[0].category] > 3000){
+                            //call yo momma
+                            nexmoController.callFunction();
+                        }
                     }
 
                     asyncCounter -= 1;
                     if(asyncCounter <= 0){
-
-                        //hack to call yo momma
-
                         res.send(reductionResult);
                     }
                 });
